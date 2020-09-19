@@ -1,3 +1,5 @@
+# Usage
+# python download_images.py -u wolf_urls.txt -o download\wolf
 # import the necessary packages
 from imutils import paths
 import argparse
@@ -6,10 +8,8 @@ import cv2
 import os
 
 ap = argparse.ArgumentParser()
-ap.add_argument("-u", "--urls", required=True,
-	help="path to file containing image URLs")
-ap.add_argument("-o", "--output", required=True,
-	help="path to output directory of images")
+ap.add_argument("-u", "--urls", required=True, help="path to file containing image URLs")
+ap.add_argument("-o", "--output", required=True, help="path to output directory of images")
 args = vars(ap.parse_args())
 # grab the list of URLs from the input file, then initialize the
 # total number of images downloaded thus far
@@ -22,8 +22,7 @@ for url in rows:
 		# try to download the image
 		r = requests.get(url, timeout=60)
 		# save the image to disk
-		p = os.path.sep.join([args["output"], "{}.jpg".format(
-			str(total).zfill(8))])
+		p = os.path.sep.join([args["output"], "{}.jpg".format(str(total).zfill(8))])
 		f = open(p, "wb")
 		f.write(r.content)
 		f.close()
